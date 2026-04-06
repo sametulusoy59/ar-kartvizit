@@ -1,3 +1,7 @@
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.module.js";
+import { FontLoader } from "https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/geometries/TextGeometry.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -62,10 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const cvMeshes = [];
-  const fontLoader = new THREE.FontLoader();
+  const fontLoader = new FontLoader();
   fontLoader.load("assets/fonts/helvetiker_regular.typeface.json", (font) => {
     cvTexts.forEach((text, i) => {
-      const geometry = new THREE.TextGeometry(text, {
+      const geometry = new TextGeometry(text, {
         font: font,
         size: 0.3,
         height: 0.05,
@@ -82,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function animate() {
     requestAnimationFrame(animate);
 
-    // CV yazılarına hafif titreşim efekti
     cvMeshes.forEach((mesh, index) => {
       mesh.rotation.y += 0.01;
       mesh.position.y += Math.sin(Date.now() * 0.001 + index) * 0.001;
