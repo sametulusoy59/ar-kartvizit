@@ -1,39 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-    container: document.body,
-    imageTargetSrc: "https://cdn.jsdelivr.net/npm/mindar@latest/dist/mindar-image-targets/targets.mind",
-  });
+  // Three.js sahnesi oluştur
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-  const { renderer, scene, camera } = mindarThree;
-
-  // Işık ekleyelim
-  const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+  // Işık
+  const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
   scene.add(light);
 
+  // Texture loader
+  const loader = new THREE.TextureLoader();
+
   // Instagram ikonu
-  const textureLoader = new THREE.TextureLoader();
-  const instagramTexture = textureLoader.load("assets/icons/instagram.png");
+  const instagramTexture = loader.load("assets/icons/instagram.png");
   const instagramMaterial = new THREE.MeshBasicMaterial({ map: instagramTexture, transparent: true });
   const instagramGeometry = new THREE.PlaneGeometry(1, 1);
   const instagramMesh = new THREE.Mesh(instagramGeometry, instagramMaterial);
-  instagramMesh.position.set(-1, 0, 0);
+  instagramMesh.position.set(-1.5, 0, -5);
+  scene.add(instagramMesh);
 
   // LinkedIn ikonu
-  const linkedinTexture = textureLoader.load("assets/icons/linkedin.png");
+  const linkedinTexture = loader.load("assets/icons/linkedin.png");
   const linkedinMaterial = new THREE.MeshBasicMaterial({ map: linkedinTexture, transparent: true });
   const linkedinGeometry = new THREE.PlaneGeometry(1, 1);
   const linkedinMesh = new THREE.Mesh(linkedinGeometry, linkedinMaterial);
-  linkedinMesh.position.set(1, 0, 0);
-
-  scene.add(instagramMesh);
+  linkedinMesh.position.set(1.5, 0, -5);
   scene.add(linkedinMesh);
 
+  // Kamera pozisyonu
+  camera.position.z = 5;
+
   // Animasyon döngüsü
-  const start = async () => {
-    await mindarThree.start();
-    renderer.setAnimationLoop(() => {
-      renderer.render(scene, camera);
-    });
-  };
-  start();
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
 });
