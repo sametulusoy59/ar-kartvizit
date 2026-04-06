@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cvMeshes = [];
   const fontLoader = new THREE.FontLoader();
-  fontLoader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
+  fontLoader.load("assets/fonts/helvetiker_regular.typeface.json", (font) => {
     cvTexts.forEach((text, i) => {
       const geometry = new THREE.TextGeometry(text, {
         font: font,
