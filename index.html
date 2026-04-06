@@ -2,44 +2,13 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>AR Kartvizit Test</title>
+  <title>Çağrı Samet Ulusoy AR Kartvizit</title>
   <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; background: black; }
   </style>
 </head>
 <body>
-  <script>
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const loader = new THREE.TextureLoader();
-    loader.load("assets/icons/instagram.png", (texture) => {
-      const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-      const geometry = new THREE.PlaneGeometry(2, 2);
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(-3, 0, -5);
-      scene.add(mesh);
-    });
-
-    loader.load("assets/icons/linkedin.png", (texture) => {
-      const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-      const geometry = new THREE.PlaneGeometry(2, 2);
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(3, 0, -5);
-      scene.add(mesh);
-    });
-
-    camera.position.z = 5;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    }
-    animate();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
