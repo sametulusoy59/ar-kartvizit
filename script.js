@@ -30,6 +30,36 @@ document.addEventListener("DOMContentLoaded", () => {
     clickableObjects.push(mesh);
   });
 
+
+  // CV hologram yazıları
+const cvTexts = [
+  "Bilgisayar Yüksek Mühendisi",
+  "Unity & Vuforia Tezi",
+  "Uluslararası Bildiri",
+  "Çalışma Deneyimi:",
+  "- Turuncu Mavi Web Tasarım (Stajyer)",
+  "- ÇOSB Müdürlüğü (Stajyer)",
+  "- Türkiye Ministry of Industry and Technology (2024- Halen)"
+];
+
+const cvMeshes = [];
+const fontLoader = new THREE.FontLoader();
+fontLoader.load("https://threejs.org/examples/fonts/helvetiker_regular.typeface.json", (font) => {
+  cvTexts.forEach((text, i) => {
+    const geometry = new THREE.TextGeometry(text, {
+      font: font,
+      size: 0.3,
+      height: 0.05,
+    });
+    const material = new THREE.MeshBasicMaterial({ color: i % 2 === 0 ? 0x00ffff : 0xff0000 });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(-4, 2 - i * 0.5, -6);
+    scene.add(mesh);
+    cvMeshes.push(mesh);
+  });
+});
+
+
   camera.position.z = 5;
 
   // Raycaster ve mouse
