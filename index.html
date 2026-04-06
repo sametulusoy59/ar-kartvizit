@@ -1,51 +1,15 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-    
-    <script>
-      // Tıklama olayları için özel script
-      AFRAME.registerComponent('click-handler', {
-        init: function () {
-          this.el.addEventListener('click', () => {
-            const url = this.el.getAttribute('data-url');
-            if (url) window.open(url, '_blank');
-          });
-        }
-      });
-    </script>
-  </head>
-
-  <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      
-      <a-assets>
-        <img id="profile-pic" src="./profil.jpg" />
-        <img id="linkedin-icon" src="./linkedin.png" />
-        <img id="insta-icon" src="./instagram.png" />
-      </a-assets>
-
-      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .clickable"></a-camera>
-
-      <a-entity mindar-image-target="targetIndex: 0">
-        
-        <a-plane position="0 0 0" height="1.6" width="1.2" color="#001a33" opacity="0.85" material="transparent: true"></a-plane>
-
-        <a-image src="#profile-pic" position="0 0.5 0.1" height="0.4" width="0.4"></a-image>
-
-        <a-text value="ÇAĞRI SAMET ULUSOY" position="-0.5 0.15 0.1" color="#00ffff" scale="0.7 0.7 0.7"></a-text>
-        <a-text value="Bilgisayar Yuksek Muhendisi" position="-0.5 0.0 0.1" color="#ffffff" scale="0.35 0.35 0.35"></a-text>
-
-        <a-text value="> T.C. Sanayi ve Teknoloji Bakanligi" position="-0.5 -0.2 0.1" color="#a3d5ff" scale="0.25 0.25 0.25"></a-text>
-        <a-text value="> YL Tez: Unity & Vuforia AR Uygulamasi" position="-0.5 -0.35 0.1" color="#a3d5ff" scale="0.25 0.25 0.25"></a-text>
-        <a-text value="> Yayin: AGBIOL 2022 Tam Metin Bildiri" position="-0.5 -0.5 0.1" color="#a3d5ff" scale="0.25 0.25 0.25"></a-text>
-
-        <a-image class="clickable" src="#linkedin-icon" position="-0.2 -0.7 0.1" height="0.15" width="0.15" data-url="https://tr.linkedin.com/in/csametulusoy" click-handler></a-image>
-        <a-image class="clickable" src="#insta-icon" position="0.2 -0.7 0.1" height="0.15" width="0.15" data-url="https://www.instagram.com/sametulusoy59" click-handler></a-image>
-
-      </a-entity>
-    </a-scene>
-  </body>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Çağrı Samet Ulusoy AR Kartvizit</title>
+  <script src="https://cdn.jsdelivr.net/npm/mindar@latest/dist/mindar-image-three.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <script src="script.js"></script>
+</body>
 </html>
