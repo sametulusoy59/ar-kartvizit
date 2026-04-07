@@ -3,17 +3,22 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>J.A.R.V.I.S. UI - Cagri Samet ULUSOY</title>
+    <title>J.A.R.V.I.S. AR - Çağrı Samet ULUSOY</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
     <script>
-      // Linkleri mobilde sorunsuz açmak için komponent
-      AFRAME.registerComponent('smart-link', {
-        schema: { url: { type: 'string' } },
+      // Mobilde linklerin kesin çalışması için geliştirilmiş komponent
+      AFRAME.registerComponent('hologram-link', {
+        schema: { url: { type: 'string' }, type: { type: 'string', default: 'direct' } },
         init: function () {
           this.el.addEventListener('click', () => {
-            window.location.href = this.data.url;
+            if (this.data.type === 'direct') {
+              window.location.href = this.data.url;
+            } else {
+              // Alt menü açma mantığı buraya eklenebilir
+              document.querySelector('#' + this.data.type).setAttribute('visible', true);
+            }
           });
         }
       });
@@ -21,10 +26,8 @@
   </head>
   <body>
     <a-scene mindar-image="imageTargetSrc: targets.mind; autoStart: true;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
+             color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
       <a-camera position="0 0 0" look-controls="enabled: false">
         <a-entity cursor="rayOrigin: mouse;" raycaster="objects: .clickable"></a-entity>
@@ -32,57 +35,64 @@
 
       <a-entity mindar-image-target="targetIndex: 0">
         
-        <a-plane src="profil.jpeg" position="0.4 -0.1 0.1" scale="0.6 0.8 1" 
-                 material="opacity: 0.7; transparent: true; blending: additive"
-                 animation="property: position; to: 0.4 -0.08 0.1; dir: alternate; dur: 1500; loop: true">
-            <a-plane width="1.1" height="0.02" color="#00f3ff" position="0 0 0.01" 
-                     animation="property: position; from: 0 0.5 0.01; to: 0 -0.5 0.01; dur: 2000; loop: true; easing: linear"></a-plane>
-        </a-plane>
-
-        <a-entity position="-0.4 0.6 0.2">
-            <a-text value="CAGRI SAMET ULUSOY" color="#00f3ff" width="3" font="exo2bold"></a-text>
-            <a-text value="COMPUTER SYSTEMS ENGINEER" position="0 -0.12 0" color="#ffffff" width="1.5"></a-text>
-            <a-plane width="1.2" height="0.01" color="#ff0000" position="0.3 -0.15 0"></a-plane>
+        <a-entity position="0 0 0.1">
+          <a-plane src="qrkartvizit.jpg" width="0.7" height="0.9" 
+                   material="opacity: 0.6; transparent: true; blending: additive"
+                   animation="property: position; to: 0 0.05 0.1; dir: alternate; dur: 2000; loop: true">
+            <a-plane width="0.7" height="0.01" color="#00f3ff" position="0 0 0.01"
+                     animation="property: position; from: 0 0.45 0.01; to: 0 -0.45 0.01; dur: 2500; loop: true; easing: linear"></a-plane>
+          </a-plane>
+          <a-ring radius-inner="0.5" radius-outer="0.55" color="#00f3ff" opacity="0.4" rotation="90 0 0"
+                  animation="property: rotation; to: 90 360 0; loop: true; dur: 8000; easing: linear"></a-ring>
         </a-entity>
 
-        <a-entity position="-0.7 0.1 0.3" rotation="0 15 0" scale="0.8 0.8 0.8">
-            <a-plane width="1" height="0.6" color="#001a33" material="opacity: 0.6; transparent: true"></a-plane>
-            <a-plane width="1" height="0.6" material="wireframe: true; color: #00f3ff; opacity: 0.3"></a-plane>
-            <a-text value="EDUCATION & PUB." position="-0.45 0.22 0.01" width="1.8" color="#00f3ff"></a-text>
-            
-            <a-entity class="clickable" position="0 0.02 0.02" smart-link="url: https://tez.yok.gov.tr/UlusalTezMerkezi/tezSorguSonucYeni.jsp">
-                <a-plane width="0.9" height="0.15" color="#004080" opacity="0.5"></a-plane>
-                <a-text value="> Master Thesis: AR/Vuforia" position="-0.4 0 0.01" width="1.2"></a-text>
-            </a-entity>
+        <a-entity position="-0.9 0.5 0.2" rotation="0 25 0" scale="0.6 0.6 0.6">
+          <a-plane width="1.4" height="0.6" color="#001a33" opacity="0.8" material="transparent: true"></a-plane>
+          <a-plane width="1.4" height="0.6" material="wireframe: true; color: #00f3ff; opacity: 0.4"></a-plane>
+          <a-text value="EGITIM & ARASTIRMA" position="-0.65 0.22 0.02" width="2" color="#00f3ff" font="exo2bold"></a-text>
+          
+          <a-entity class="clickable" position="0 0 0.03" hologram-link="url: https://tez.yok.gov.tr/UlusalTezMerkezi/tezSorguSonucYeni.jsp">
+            <a-plane width="1.3" height="0.2" color="#004080" opacity="0.5"></a-plane>
+            <a-text value="> Yüksek Lisans Tezi (Unity/Vuforia)" position="-0.6 0 0.01" width="1.5"></a-text>
+          </a-entity>
         </a-entity>
 
-        <a-entity position="0.7 0.1 0.3" rotation="0 -15 0" scale="0.8 0.8 0.8">
-            <a-plane width="1" height="0.6" color="#001a33" material="opacity: 0.6; transparent: true"></a-plane>
-            <a-plane width="1" height="0.6" material="wireframe: true; color: #ffaa00; opacity: 0.3"></a-plane>
-            <a-text value="EXPERIENCE" position="-0.45 0.22 0.01" width="1.8" color="#ffaa00"></a-text>
-            <a-text value="- Ministry of Industry (2024)\n- Cerkezkoy OIZ\n- Turuncu Mavi Agency" position="-0.45 -0.05 0.01" width="1.2" line-height="50"></a-text>
+        <a-entity position="0.9 0.5 0.2" rotation="0 -25 0" scale="0.6 0.6 0.6">
+          <a-plane width="1.4" height="0.6" color="#001a33" opacity="0.8"></a-plane>
+          <a-plane width="1.4" height="0.6" material="wireframe: true; color: #ff3300; opacity: 0.4"></a-plane>
+          <a-text value="DENEYIM" position="-0.65 0.22 0.02" width="2" color="#ff3300" font="exo2bold"></a-text>
+          <a-text value="- Ministry of Industry (2024)\n- Cerkezkoy OIZ Director.\n- Turuncu Mavi Web Agency" position="-0.65 -0.05 0.02" width="1.4" line-height="50"></a-text>
         </a-entity>
 
-        <a-entity position="0 -0.7 0.2">
-            <a-entity class="clickable" position="-0.3 0 0" smart-link="url: https://www.instagram.com/sametulusoy59">
-                <a-plane width="0.5" height="0.15" color="#E1306C" opacity="0.8">
-                    <a-text value="INSTAGRAM" align="center" width="1.5"></a-text>
-                </a-plane>
-                <a-plane width="0.45" height="0.05" color="#ffffff" position="0 0.1 0" opacity="0.2" 
-                         animation="property: scale; from: 1 0 1; to: 1 4 1; dur: 1000; loop: true; dir: alternate"></a-plane>
-            </a-entity>
-
-            <a-entity class="clickable" position="0.3 0 0" smart-link="url: https://tr.linkedin.com/in/csametulusoy">
-                <a-plane width="0.5" height="0.15" color="#0077b5" opacity="0.8">
-                    <a-text value="LINKEDIN" align="center" width="1.5"></a-text>
-                </a-plane>
-                <a-plane width="0.45" height="0.05" color="#ffffff" position="0 0.1 0" opacity="0.2"
-                         animation="property: scale; from: 1 0 1; to: 1 4 1; dur: 1200; loop: true; dir: alternate"></a-plane>
-            </a-entity>
+        <a-entity position="-0.9 -0.5 0.2" rotation="0 25 0" scale="0.6 0.6 0.6">
+          <a-plane width="1.4" height="0.5" color="#001a33" opacity="0.8"></a-plane>
+          <a-text value="TEKNOLOJI YIGINI" position="-0.65 0.18 0.02" width="2" color="#00f3ff" font="exo2bold"></a-text>
+          <a-text value="Unity | Vuforia | WebAR | C# .NET" position="-0.65 -0.05 0.02" width="1.5" color="#ffffff"></a-text>
         </a-entity>
 
-        <a-ring radius-inner="0.4" radius-outer="0.42" color="#00f3ff" position="0 0 -0.1" rotation="90 0 0"
-                animation="property: rotation; to: 90 360 0; loop: true; dur: 10000; easing: linear"></a-ring>
+        <a-entity position="0.9 -0.5 0.2" rotation="0 -25 0" scale="0.6 0.6 0.6">
+          <a-plane width="1.4" height="0.5" color="#001a33" opacity="0.8"></a-plane>
+          <a-text value="SOSYAL MEDYA" position="-0.65 0.18 0.02" width="2" color="#00f3ff"></a-text>
+          
+          <a-entity class="clickable" position="-0.35 -0.05 0.02" hologram-link="url: https://www.instagram.com/sametulusoy59">
+            <a-plane width="0.6" height="0.15" color="#E1306C">
+              <a-text value="INSTAGRAM" align="center" width="1.8"></a-text>
+            </a-plane>
+            <a-plane width="0.6" height="0.05" color="#ffffff" position="0 0.1 0" opacity="0.3"
+                     animation="property: scale; from: 1 0 1; to: 1 3 1; dur: 800; loop: true; dir: alternate"></a-plane>
+          </a-entity>
+
+          <a-entity class="clickable" position="0.35 -0.05 0.02" hologram-link="url: https://tr.linkedin.com/in/csametulusoy">
+            <a-plane width="0.6" height="0.15" color="#0077b5">
+              <a-text value="LINKEDIN" align="center" width="1.8"></a-text>
+            </a-plane>
+          </a-entity>
+        </a-entity>
+
+        <a-entity position="0 -0.8 0.1">
+            <a-text value="ARTIRILMIS GERCEKLIK CV" align="center" width="2.5" color="#ffffff" font="exo2bold"></a-text>
+            <a-plane width="1.5" height="0.02" color="#00f3ff" position="0 -0.1 0"></a-plane>
+        </a-entity>
 
       </a-entity>
     </a-scene>
