@@ -30,15 +30,15 @@
 
       <a-entity mindar-image-target="targetIndex: 0">
         
-        <a-entity position="0 0 0.1">
+        <a-entity position="0 0.1 0.2">
           <a-cone geometry="radiusBottom: 0.5; radiusTop: 0.1; height: 1.2" 
-                  material="color: #00f3ff; opacity: 0.15; transparent: true; side: double; blending: additive"
-                  position="0 -0.5 0" rotation="0 0 0"
-                  animation="property: material.opacity; from: 0.1; to: 0.3; dir: alternate; dur: 1000; loop: true">
+                  material="color: #00f3ff; opacity: 0.08; transparent: true; side: double; blending: additive; shader: flat"
+                  position="0 -0.5 0.1" rotation="180 0 0"
+                  animation="property: material.opacity; from: 0.05; to: 0.15; dir: alternate; dur: 1500; loop: true">
           </a-cone>
 
           <a-circle src="profil.jpeg" radius="0.35" 
-                    material="opacity: 0.9; transparent: true; blending: additive; side: double"
+                    material="opacity: 0.9; transparent: true; blending: additive; side: double; shader: flat"
                     animation="property: position; to: 0 0.05 0.1; dir: alternate; dur: 2000; loop: true">
             <a-plane width="0.7" height="0.01" color="#00f3ff" position="0 0 0.01"
                      animation="property: position; from: 0 0.35 0.01; to: 0 -0.35 0.01; dur: 2500; loop: true; easing: linear"></a-plane>
@@ -48,6 +48,8 @@
                   animation="property: rotation; to: 90 360 0; loop: true; dur: 4000; easing: linear"></a-ring>
           <a-ring radius-inner="0.42" radius-outer="0.43" color="#ff3300" rotation="90 0 0" opacity="0.6"
                   animation="property: rotation; to: 90 -360 0; loop: true; dur: 7000; easing: linear"></a-ring>
+          <a-ring radius-inner="0.48" radius-outer="0.5" color="#00f3ff" rotation="45 45 0" opacity="0.2"
+                  animation="property: rotation; to: 405 405 0; loop: true; dur: 15000; easing: linear"></a-ring>
         </a-entity>
 
         <a-entity position="0 0.8 0.1">
@@ -85,7 +87,7 @@
         <a-entity position="-1 -0.4 0.2" rotation="0 20 0" scale="0.45 0.45 0.45">
           <a-plane width="2.2" height="0.7" color="#001a33" opacity="0.8"></a-plane>
           <a-text value="TEKNOLOJI YIGINI" position="-1 0.25 0.02" width="2.5" color="#00f3ff"></a-text>
-          <a-text value="Unity | Vuforia | WebAR\nHolographic UI | C# .NET" position="-1 -0.1 0.02" width="2.2" color="#ffffff" line-height="50"></a-text>
+          <a-text value="Unity | Vuforia | WebAR\nHolographic UI | C# .NET | ARCore" position="-1 -0.1 0.02" width="2.2" color="#ffffff" line-height="50"></a-text>
         </a-entity>
 
         <a-entity position="1 -0.4 0.2" rotation="0 -20 0" scale="0.45 0.45 0.45">
@@ -101,11 +103,16 @@
         </a-entity>
 
         <a-entity position="0 0 0">
-            <a-plane width="0.05" height="0.05" color="#00f3ff" position="-0.5 0.5 0.3" opacity="0.4" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-plane>
-            <a-plane width="0.03" height="0.03" color="#ff3300" position="0.6 -0.6 0.3" opacity="0.4" animation="property: position; to: 0.6 -0.55 0.3; dir: alternate; loop: true; dur: 3000"></a-plane>
-            <a-plane width="0.04" height="0.04" color="#00f3ff" position="0.8 0.1 0.4" opacity="0.3"></a-plane>
-            <a-plane width="0.02" height="0.02" color="#ffffff" position="-0.7 -0.1 0.4" opacity="0.5"></a-plane>
-            <a-plane width="0.05" height="0.01" color="#00f3ff" position="0.2 0.7 0.2" opacity="0.6"></a-plane>
+            <a-plane width="0.05" height="0.05" color="#00f3ff" position="-1.2 0.6 0.3" opacity="0.4" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-plane>
+            <a-sphere radius="0.02" color="#ff3300" position="0.8 -0.8 0.4" opacity="0.4" animation="property: position; to: 0.8 -0.75 0.4; dir: alternate; loop: true; dur: 3000"></a-sphere>
+            <a-cylinder radius="0.01" height="0.05" color="#00f3ff" position="0.9 0.1 0.4" opacity="0.3" animation="property: rotation; to: 360 0 360; loop: true; dur: 6000"></a-cylinder>
+            <a-tetrahedron radius="0.03" color="#ffffff" position="-0.7 -0.2 0.4" opacity="0.5" animation="property: scale; from: 1 1 1; to: 1.5 1.5 1.5; dir: alternate; dur: 2000; loop: true"></a-tetrahedron>
+            <a-octahedron radius="0.04" color="#00f3ff" position="0.3 0.8 0.2" opacity="0.6" animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"></a-octahedron>
+            <a-plane width="0.03" height="0.03" color="#ff3300" position="-1.5 -0.6 0.3" opacity="0.5"></a-plane>
+            <a-sphere radius="0.01" color="#ffffff" position="1.5 0.8 0.3" opacity="0.4"></a-sphere>
+            <a-cylinder radius="0.01" height="0.03" color="#00f3ff" position="-0.2 1.2 0.1" opacity="0.3"></a-cylinder>
+            <a-box color="#ff3300" size="0.02" position="-1.5 0.1 0.3" opacity="0.4" animation="property: rotation; to: 360 360 360; loop: true; dur: 2000"></a-box>
+            <a-sphere radius="0.015" color="#00f3ff" position="1.2 -1.1 0.2" opacity="0.6" animation="property: position; to: 1.2 -1.05 0.2; dir: alternate; loop: true; dur: 2500"></a-sphere>
         </a-entity>
 
       </a-entity>
